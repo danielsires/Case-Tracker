@@ -12,7 +12,13 @@ function App() {
     const engineersArray = JSON.parse(storedState);
     return engineersArray || [];
   });
+  const updateCount = (obj) => {
+    setEngineerObj(...obj, (obj[count] = count));
+  };
   const addEngineer = (e) => {
+    if (e.target.value === '') {
+      return;
+    }
     e.preventDefault();
     setEngineersArray([...engineersArray, engineerObj]);
     setEngineerObj({ ...engineerObj, name: '' });
@@ -47,8 +53,13 @@ function App() {
         <button onClick={resetLocalStorage}>Remove Engineers</button>
       )}
       <div className="engineers-container">
-        {engineersArray.map((eng, k) => (
-          <Engineer name={eng.name} count={eng.count} key={k} />
+        {engineersArray.map((engineer, k) => (
+          <Engineer
+            name={engineer.name}
+            count={engineer.count}
+            key={k}
+            update={updateCount}
+          />
         ))}
       </div>
     </>
