@@ -15,10 +15,16 @@ function App() {
   const addEngineer = (e) => {
     e.preventDefault();
     setEngineersArray([...engineersArray, engineerObj]);
+    setEngineerObj({ ...engineerObj, name: '' });
   };
 
   const handleInputChange = (e) => {
     setEngineerObj({ ...engineerObj, name: e.target.value });
+  };
+
+  const resetLocalStorage = () => {
+    localStorage.removeItem('engineersArray');
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -36,6 +42,9 @@ function App() {
         />
         <button onClick={addEngineer}>Add Engineer</button>
       </form>
+      {engineersArray.length <= 0 ? null : (
+        <button onClick={resetLocalStorage}>Remove Engineers</button>
+      )}
       <div className="engineers-container">
         {engineersArray.map((eng, k) => (
           <Engineer name={eng.name} count={eng.count} key={k} />
