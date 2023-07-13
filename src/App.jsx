@@ -38,6 +38,7 @@ function App() {
         <input
           type="text"
           value={engineerObj.name}
+          placeholder="Name"
           onChange={handleInputChange}
         />
         <button onClick={addEngineer}>Add Engineer</button>
